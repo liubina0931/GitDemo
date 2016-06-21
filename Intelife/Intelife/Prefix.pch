@@ -1,0 +1,51 @@
+//
+//  Prefix.pch
+//  Intelife
+//
+//  Created by LiuBin on 16-4-21.
+//  Copyright (c) 2016年 richdataco. All rights reserved.
+//
+
+#ifndef Intelife_Prefix_pch
+#define Intelife_Prefix_pch
+
+#import "GlobalDefines.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
+
+// ALog always displays output regardless of the DEBUG setting
+#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#define SHOW_ALERT_VIEW(title,msg,cancelBtnTitle,otherBtnTitle,style,alertViewtag)    \
+{   \
+    UIAlertView *alert = [[UIAlertView alloc] \
+    initWithTitle:title message:msg \
+    delegate:self \
+    cancelButtonTitle: cancelBtnTitle \
+    otherButtonTitles:otherBtnTitle, nil]; \
+    alert.alertViewStyle = style; \
+    alert.tag = alertViewtag; \
+    [alert show]; \
+}
+
+#define SHOW_ACTION_SHEET(cancelBtnTitle,destructiveBtnTitle,otherBtnTitle1,otherBtnTitle2,actionTag)  \
+{   \
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] \
+    initWithTitle:nil \
+    delegate:self \
+    cancelButtonTitle:cancelBtnTitle  \
+    destructiveButtonTitle:destructiveBtnTitle    \
+    otherButtonTitles:otherBtnTitle1,otherBtnTitle2,nil];    \
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;   \
+    actionSheet.tag = actionTag; \
+    [actionSheet showInView:self.view]; \
+}
+
+#endif
